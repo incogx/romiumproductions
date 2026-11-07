@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --gold-glow: 223, 183, 108;
+    --silver-glow: 207, 212, 220;
+  }
+
+  body {
+    background-color: #030305;
+    color: #e2e8f0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .font-heading {
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  .font-display {
+    font-family: 'Cinzel', serif;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #07070a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #252836;
+  border-radius: 4px;
+  border: 1px solid rgba(223, 183, 108, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c59324;
+}
+
+/* Metallic Text Utilities */
+.text-metallic-gold {
+  background: linear-gradient(135deg, #ffffff 0%, #f7d77b 30%, #dfb76c 60%, #b8860b 90%, #fef3c7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-metallic-silver {
+  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 40%, #94a3b8 80%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-metallic-bronze {
+  background: linear-gradient(135deg, #fce7f3 0%, #d97706 50%, #78350f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Glassmorphism & Borders */
+.glass-panel {
+  background: rgba(12, 13, 18, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.glass-panel-gold {
+  background: radial-gradient(circle at top left, rgba(223, 183, 108, 0.06), rgba(8, 8, 12, 0.85));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(223, 183, 108, 0.22);
+}
+
+.glass-panel-gold:hover {
+  border-color: rgba(223, 183, 108, 0.45);
+  box-shadow: 0 10px 40px -10px rgba(223, 183, 108, 0.15);
+}
+
+/* Stage Lighting Beam Styles */
+.stage-beam {
+  position: absolute;
+  pointer-events: none;
+  filter: blur(28px);
+  mix-blend-mode: screen;
+  transform-origin: top center;
+}
+
+.stage-glow-conic {
+  background: conic-gradient(
+    from 180deg at 50% 0%,
+    rgba(223, 183, 108, 0.25) 0deg,
+    rgba(255, 255, 255, 0.4) 15deg,
+    rgba(223, 183, 108, 0.1) 40deg,
+    transparent 80deg,
+    transparent 280deg,
+    rgba(223, 183, 108, 0.1) 320deg,
+    rgba(255, 255, 255, 0.4) 345deg,
+    rgba(223, 183, 108, 0.25) 360deg
+  );
+}
+
+/* Truss Pattern Background */
+.bg-truss-pattern {
+  background-image: 
+    linear-gradient(45deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.02) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.02) 75%);
+  background-size: 40px 40px;
+  background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+}
