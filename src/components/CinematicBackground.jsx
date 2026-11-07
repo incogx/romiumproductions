@@ -53,7 +53,7 @@ export default function CinematicBackground() {
           scale: videoScale,
           y: videoY,
         }}
-        className="absolute inset-0 w-full h-full transform-gpu origin-center"
+        className="absolute inset-0 w-full h-full transform-gpu origin-center will-change-transform"
       >
         {/* HTML5 Background Video - Frontal & Vibrant */}
         <video
@@ -62,7 +62,7 @@ export default function CinematicBackground() {
           loop
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
           onLoadedData={() => setVideoLoaded(true)}
           onCanPlay={() => setVideoLoaded(true)}
           className={`absolute inset-0 w-full h-full object-cover filter contrast-110 saturate-120 transition-opacity duration-700 ${
@@ -92,7 +92,7 @@ export default function CinematicBackground() {
             rotate: beamAngleLeft,
             opacity: beamIntensity,
           }}
-          className="absolute -top-32 left-[12%] w-48 sm:w-72 h-[1200px] bg-gradient-to-b from-white/40 via-gold-400/25 to-transparent blur-3xl transform-gpu origin-top"
+          className="absolute -top-32 left-[12%] w-48 sm:w-72 h-[1200px] bg-gradient-to-b from-white/40 via-gold-400/25 to-transparent blur-3xl transform-gpu origin-top will-change-transform"
         />
 
         {/* Right Moving Head Beam */}
@@ -101,7 +101,7 @@ export default function CinematicBackground() {
             rotate: beamAngleRight,
             opacity: beamIntensity,
           }}
-          className="absolute -top-32 right-[12%] w-48 sm:w-72 h-[1200px] bg-gradient-to-b from-white/40 via-gold-400/25 to-transparent blur-3xl transform-gpu origin-top"
+          className="absolute -top-32 right-[12%] w-48 sm:w-72 h-[1200px] bg-gradient-to-b from-white/40 via-gold-400/25 to-transparent blur-3xl transform-gpu origin-top will-change-transform"
         />
 
         {/* Center Stage Spotlight Cone */}

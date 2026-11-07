@@ -1,8 +1,6 @@
 import React from 'react';
 import { 
   Instagram, 
-  Facebook, 
-  Youtube, 
   Linkedin, 
   MessageSquare, 
   ArrowUp, 
@@ -77,24 +75,6 @@ export default function Footer() {
                 className="w-9 h-9 rounded-full bg-[#0d0e17] border border-white/10 hover:border-gold-500/50 hover:text-gold-400 flex items-center justify-center text-slate-300 transition-colors"
               >
                 <Instagram className="w-4 h-4" />
-              </a>
-              <a
-                href={brandConfig.socials.facebook}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Facebook"
-                className="w-9 h-9 rounded-full bg-[#0d0e17] border border-white/10 hover:border-gold-500/50 hover:text-gold-400 flex items-center justify-center text-slate-300 transition-colors"
-              >
-                <Facebook className="w-4 h-4" />
-              </a>
-              <a
-                href={brandConfig.socials.youtube}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="YouTube"
-                className="w-9 h-9 rounded-full bg-[#0d0e17] border border-white/10 hover:border-gold-500/50 hover:text-gold-400 flex items-center justify-center text-slate-300 transition-colors"
-              >
-                <Youtube className="w-4 h-4" />
               </a>
               <a
                 href={brandConfig.socials.linkedin}
