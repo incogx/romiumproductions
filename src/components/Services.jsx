@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Volume2, 
@@ -26,6 +27,17 @@ const iconMap = {
 
 export default function Services() {
   const [selectedService, setSelectedService] = useState(null);
+
+  useEffect(() => {
+    if (!selectedService) return undefined;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [selectedService]);
 
   return (
     <section id="services" className="relative py-28 bg-[#050609]/80 backdrop-blur-[2px] text-white overflow-hidden">
@@ -128,9 +140,10 @@ export default function Services() {
       </div>
 
       {/* Interactive Service Details Lightbox Modal */}
-      <AnimatePresence>
-        {selectedService && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+      {createPortal(
+        <AnimatePresence>
+          {selectedService && (
+            <div className="fixed inset-0 z-[60] flex items-start sm:items-center justify-center p-3 sm:p-6 py-4 sm:py-6 overflow-y-auto overscroll-contain">
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -146,10 +159,10 @@ export default function Services() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: "spring", duration: 0.5 }}
-              className="relative w-full max-w-3xl bg-[#0c0d14] rounded-2xl border border-gold-500/30 shadow-2xl shadow-black overflow-hidden z-10 max-h-[90vh] flex flex-col"
+              className="relative w-full max-w-3xl min-h-0 bg-[#0c0d14] rounded-2xl border border-gold-500/30 shadow-2xl shadow-black overflow-hidden z-10 max-h-[calc(100dvh-2rem)] sm:max-h-[90vh] flex flex-col"
             >
               {/* Modal Header Image */}
-              <div className="relative h-48 sm:h-64 w-full">
+              <div className="relative h-44 sm:h-64 w-full flex-shrink-0">
                 <img
                   src={selectedService.image}
                   alt={selectedService.title}
@@ -163,18 +176,18 @@ export default function Services() {
                 >
                   <X className="w-5 h-5" />
                 </button>
-                <div className="absolute bottom-4 left-6 right-6">
+                <div className="absolute bottom-4 left-4 right-4 sm:left-6 sm:right-6">
                   <span className="px-3 py-1 rounded-full text-xs font-mono uppercase bg-gold-500/20 text-gold-300 border border-gold-500/40">
                     {selectedService.badge}
                   </span>
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-2 font-heading">
+                  <h3 className="text-xl sm:text-3xl font-extrabold text-white mt-2 font-heading">
                     {selectedService.title}
                   </h3>
                 </div>
               </div>
 
               {/* Modal Content */}
-              <div className="p-6 sm:p-8 overflow-y-auto space-y-6">
+              <div className="min-h-0 p-4 sm:p-8 overflow-y-auto overscroll-contain touch-pan-y space-y-5 sm:space-y-6">
                 <div>
                   <h4 className="text-xs uppercase tracking-wider font-mono text-slate-400 mb-2">
                     Service Overview
@@ -237,9 +250,11 @@ export default function Services() {
                 </div>
               </div>
             </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+            </div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </section>
   );
 }

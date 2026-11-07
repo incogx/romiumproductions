@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Sparkles, 
@@ -20,6 +21,17 @@ import { sampleProjects } from '../data/productionData';
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
   const featured = sampleProjects[0]; // CIPOFEST'26
+
+  useEffect(() => {
+    if (!selectedProject) return undefined;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [selectedProject]);
 
   return (
     <section id="work" className="relative py-28 bg-[#030306]/80 backdrop-blur-[2px] text-white overflow-hidden">
@@ -248,9 +260,10 @@ export default function Projects() {
       </div>
 
       {/* Lightbox / Project Details Modal */}
-      <AnimatePresence>
-        {selectedProject && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+      {createPortal(
+        <AnimatePresence>
+          {selectedProject && (
+            <div className="fixed inset-0 z-[60] flex items-start sm:items-center justify-center p-3 sm:p-6 py-4 sm:py-6 overflow-y-auto overscroll-contain">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -263,9 +276,9 @@ export default function Projects() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-3xl bg-[#0c0d14] rounded-2xl border border-gold-500/30 shadow-2xl overflow-hidden z-10 max-h-[90vh] flex flex-col"
+              className="relative w-full max-w-3xl min-h-0 bg-[#0c0d14] rounded-2xl border border-gold-500/30 shadow-2xl overflow-hidden z-10 max-h-[calc(100dvh-2rem)] sm:max-h-[90vh] flex flex-col"
             >
-              <div className="relative h-64 sm:h-72 w-full">
+              <div className="relative h-48 sm:h-72 w-full flex-shrink-0">
                 <img
                   src={selectedProject.image}
                   alt={selectedProject.title}
@@ -279,18 +292,18 @@ export default function Projects() {
                 >
                   <X className="w-5 h-5" />
                 </button>
-                <div className="absolute bottom-4 left-6 right-6">
+                <div className="absolute bottom-4 left-4 right-4 sm:left-6 sm:right-6">
                   <span className="px-3 py-1 rounded-full text-xs font-mono uppercase bg-gold-500/20 text-gold-300 border border-gold-500/40">
                     {selectedProject.sampleNotice}
                   </span>
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-heading mt-2">
+                  <h3 className="text-xl sm:text-3xl font-extrabold text-white font-heading mt-2">
                     {selectedProject.title}
                   </h3>
                 </div>
               </div>
 
-              <div className="p-6 sm:p-8 overflow-y-auto space-y-6">
-                <div className="grid grid-cols-2 gap-4">
+              <div className="min-h-0 p-4 sm:p-8 overflow-y-auto overscroll-contain touch-pan-y space-y-5 sm:space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                   <div className="p-3.5 rounded-xl bg-black/40 border border-white/10">
                     <span className="text-[11px] font-mono uppercase text-slate-400 block">Audience</span>
                     <span className="text-sm font-bold text-white">{selectedProject.audience}</span>
@@ -339,9 +352,11 @@ export default function Projects() {
                 </div>
               </div>
             </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+            </div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </section>
   );
 }
