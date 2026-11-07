@@ -18,7 +18,6 @@ export const brandConfig = {
   hours: "24/7 Production & Tech Rider Support",
   socials: {
     instagram: "https://instagram.com/romiumproductions",
-    linkedin: "https://linkedin.com/company/romiumproductions",
     whatsapp: "https://wa.me/918667000953"
   }
 };

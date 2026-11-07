@@ -1,7 +1,6 @@
 import React from 'react';
 import { 
   Instagram, 
-  Linkedin, 
   MessageSquare, 
   ArrowUp, 
   Phone, 
@@ -75,15 +74,6 @@ export default function Footer() {
                 className="w-9 h-9 rounded-full bg-[#0d0e17] border border-white/10 hover:border-gold-500/50 hover:text-gold-400 flex items-center justify-center text-slate-300 transition-colors"
               >
                 <Instagram className="w-4 h-4" />
-              </a>
-              <a
-                href={brandConfig.socials.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="LinkedIn"
-                className="w-9 h-9 rounded-full bg-[#0d0e17] border border-white/10 hover:border-gold-500/50 hover:text-gold-400 flex items-center justify-center text-slate-300 transition-colors"
-              >
-                <Linkedin className="w-4 h-4" />
               </a>
               <a
                 href={brandConfig.socials.whatsapp}
